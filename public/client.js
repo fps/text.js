@@ -21,4 +21,8 @@ $(document).ready(function() {
         // console.log('property');
         throttled_change(e); 
     });
+
+    socket.on('disconnect', function() {
+        console.log('disconnect');
+    });
 });

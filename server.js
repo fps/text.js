@@ -4,7 +4,9 @@ var express = require('express')
 ,   io = require('socket.io').listen(server)
 ,   jade = require('jade')
 ,   uuid = require('node-uuid')
-,   conf = require('./config.json');
+,   delete_key = require('key-del')
+,   conf = require('./config.json')
+;
 
 var texts = { };
 
@@ -21,7 +23,7 @@ app.get('/text/:id', function(req, res) {
     
     if (!texts.hasOwnProperty(id)) {
         console.log("new id: " + id);
-        var text = { text: '', nsp: io.of("/" + id), last_update: new Date() }
+        var text = { text: '', nsp: io.of("/" + id), last_update: new Date(), id: id }
         texts[id] = text;
 
         text.nsp.on('connection', function(socket) {
@@ -29,6 +31,7 @@ app.get('/text/:id', function(req, res) {
             socket.on('text', function(data) {
                 console.log('text for session: ' + id + ' at: ' + text.last_update);
                 text.text = data.text;
+                text.last_update = new Date();
                 text.nsp.emit('text', data);
             });
         })
@@ -38,7 +41,7 @@ app.get('/text/:id', function(req, res) {
         //});
     }
     
-    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': texts[id].text }));
+    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': texts[id].text, ttl: conf.ttl }));
 });
 
 
@@ -49,3 +52,17 @@ io.sockets.on('disconnect', function(socket) {
 io.sockets.on('connect', function(socket) {
     console.log('connect: ' + socket.id);
 });
+
+setInterval(function() {
+    // console.log('gc');
+    for (key in texts) {
+        var alive = new Date().getTime() - texts[key].last_update.getTime();
+        // console.log(texts[key].id + ' ' + alive);
+        if (alive > conf.ttl) {
+            console.log('removing ' + texts[key].id);
+            //texts[key].nsp.emit('disconnect');
+            texts = delete_key(texts, [key]);
+            break;
+        }
+    }
+}, 100);
