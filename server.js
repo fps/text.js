@@ -20,6 +20,7 @@ app.get('/text/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
     if (!texts.hasOwnProperty(id)) {
+        console.log("new id: " + id);
 	var text = { text: '', nsp: io.of("/" + id), last_update: new Date() }
         texts[id] = text;
 
