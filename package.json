@@ -2,6 +2,7 @@
     "name": "text.js",
     "description": "Collaborative text editing web application",
     "author": "Florian Paul Schmidt",
+    "version": "0.0.1",
     "dependencies": {
         "express": "*",
         "socket.io": "*",
