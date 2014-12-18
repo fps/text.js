@@ -19,12 +19,13 @@ app.get('/', function (req, res) {
 app.get('/text/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
-    if (!texts.hasOwnProperty('id')) {
+    if (!texts.hasOwnProperty(id)) {
         texts[id] = { text: '', nsp: io.of("/" + id) };
     }
     
     texts[id].nsp.on('connection', function(socket) {
         socket.on('text', function(data) {
+            //console.log('text!');
             texts[id].text = data.text;
             // console.log('text: ' + data.text);
             texts[id].nsp.emit('text', data);
