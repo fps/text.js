@@ -1,0 +1,11 @@
+{
+    "name": "text.js",
+    "description": "Collaborative text editing web application",
+    "author": "Florian Paul Schmidt",
+    "dependencies": {
+        "express": "*",
+        "socket.io": "*",
+        "jade": "*",
+        "node-uuid": "*"
+    }
+}

@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        title text.js
+        link(rel="stylesheet" href="/style.css")
+        script(src="/jquery-1.11.1.min.js")
+        script(src="/client.js")
+        script(src="/socket.io/socket.io.js")
+    body
+        header
+            <a href="/")>text.js (new text)</a>
+        #uuid #{decodeURIComponent(id)}
+        #textarea_container
+            textarea(id="text" type="text" placeholder="text goes here..." rows="10")
+                |#{text}
