@@ -8,7 +8,7 @@ var express = require('express')
 ,   conf = require('./config.json')
 ;
 
-var texts = { };
+var sessions = { };
 
 server.listen(conf.port);
 
@@ -21,27 +21,27 @@ app.get('/', function (req, res) {
 app.get('/text/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
-    if (!texts.hasOwnProperty(id)) {
+    if (!sessions.hasOwnProperty(id)) {
         console.log("new id: " + id);
-        var text = { text: '', nsp: io.of("/" + id), last_update: new Date(), id: id }
-        texts[id] = text;
+        var session = { text: '', namespace: io.of("/" + id), last_update: new Date(), id: id }
+        sessions[id] = session;
 
-        text.nsp.on('connection', function(socket) {
-    	    console.log("connection on namespace: " + id + ' at: ' + text.last_update);
+        session.namespace.on('connection', function(socket) {
+    	    console.log("connection on namespace: " + id + ' at: ' + session.last_update);
             socket.on('text', function(data) {
-                console.log('text for session: ' + id + ' at: ' + text.last_update);
-                text.text = data.text;
-                text.last_update = new Date();
-                text.nsp.emit('text', data);
+                console.log('new text for session: ' + id + ' at: ' + session.last_update);
+                session.text = data.text;
+                session.last_update = new Date();
+                session.namespace.emit('text', data);
             });
         })
     
-        // texts[id].nsp.on('disconnect', function(socket) {
-        //     console.log("discconnection on namespace: " + id + ' number of connections: ' + --texts[id].number_of_connections);
+        // sessions[id].namespace.on('disconnect', function(socket) {
+        //     console.log("discconnection on namespace: " + id + ' number of connections: ' + --sessions[id].number_of_connections);
         //});
     }
     
-    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': texts[id].text, ttl: conf.ttl }));
+    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl }));
 });
 
 
@@ -55,14 +55,25 @@ io.sockets.on('connect', function(socket) {
 
 setInterval(function() {
     // console.log('gc');
-    for (key in texts) {
-        var alive = new Date().getTime() - texts[key].last_update.getTime();
-        // console.log(texts[key].id + ' ' + alive);
+    for (key in sessions) {
+        session = sessions[key];
+        var number_of_connections = 0
+        for (connection in session.namespace.connected) {
+            ++number_of_connections;
+        }
+        // console.log(session.id + " " + number_of_connections);
+        if (number_of_connections >= 0) {
+            session.last_update = new Date();
+        }
+
+        //console.log(sessions[key].namespace.connected);
+        var alive = new Date().getTime() - session.last_update.getTime();
+        // console.log(sessions[key].id + ' ' + alive);
         if (alive > conf.ttl) {
-            console.log('removing ' + texts[key].id);
-            //texts[key].nsp.emit('disconnect');
-            texts = delete_key(texts, [key]);
+            console.log('removing ' + session.id);
+            //sessions[key].namespace.emit('disconnect');
+            sessions = delete_key(sessions, [key]);
             break;
         }
     }
-}, 100);
+}, 1000);
