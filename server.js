@@ -21,7 +21,7 @@ app.get('/text/:id', function(req, res) {
     
     if (!texts.hasOwnProperty(id)) {
         console.log("new id: " + id);
-	var text = { text: '', nsp: io.of("/" + id), last_update: new Date() }
+        var text = { text: '', nsp: io.of("/" + id), last_update: new Date() }
         texts[id] = text;
 
         text.nsp.on('connection', function(socket) {
