@@ -62,7 +62,7 @@ setInterval(function() {
             ++number_of_connections;
         }
         // console.log(session.id + " " + number_of_connections);
-        if (number_of_connections >= 0) {
+        if (number_of_connections > 0) {
             session.last_update = new Date();
         }
 
@@ -72,8 +72,18 @@ setInterval(function() {
         if (alive > conf.ttl) {
             console.log('removing ' + session.id);
             //sessions[key].namespace.emit('disconnect');
-            sessions = delete_key(sessions, [key]);
+            // sessions = delete_key(sessions, [key]);
+            delete io.nsps['/' + session.id];
+            //delete sessions[key].namespace;
+            delete sessions[key];
             break;
         }
     }
-}, 1000);
+}, 10);
+
+/*
+require("net").createServer (function(socket) {
+        repl = require('repl');
+        repl.start("my-node-process>", socket);
+}).listen(5000, "localhost");
+*/

@@ -8,6 +8,7 @@
         "socket.io": "*",
         "jade": "*",
         "node-uuid": "*",
-        "key-del": "*"
+        "key-del": "*",
+        "heapdump": "*"
     }
 }
