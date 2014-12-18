@@ -1,15 +1,16 @@
 doctype html
 html
     head
-        title text.js
+        title #{id} - text.js
         link(rel="stylesheet" href="/style.css")
         script(src="/jquery-1.11.1.min.js")
-        script(src="/client.js")
+        script(src="/underscore-min.js")
         script(src="/socket.io/socket.io.js")
+        script(src="/client.js")
     body
         header
-            <a href="/")>text.js (new text)</a>
+            <a href="/")>text.js (new text)</a> <a href="http://github.com/fps/text.js">code: http://github.com/fps/text.js</a>
         #uuid #{decodeURIComponent(id)}
         #textarea_container
-            textarea(id="text" type="text" placeholder="text goes here..." rows="10")
+            textarea(id="text" type="text" placeholder="Text goes here... Just enter some text, then share the link in the addressbar. Updates should show up in every browser that has the same URL open. To get a new session, click (new text) above. Or just use a url of the form /text/yourdesiredsessionname. Note: This version does not implement proper locking. It's on the TODO list. So show some restraint while editing. Simultanous edits WILL interfere." rows="10")
                 |#{text}

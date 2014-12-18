@@ -1,8 +1,10 @@
-$(document).ready(function(){
+var socket;
+
+$(document).ready(function() {
     var uuid = $('#uuid').text();
     console.log("orly?" + uuid);
 
-    var socket = io.connect('/' + uuid);
+    socket = io('/' + uuid);
     // socket.emit('hi', {});
 
     socket.on('text', function(data) {
@@ -10,7 +12,13 @@ $(document).ready(function(){
         $('textarea').val(data.text);
     });
 
-    $('textarea').change(function() {
-        socket.emit('text', { 'text': $('textarea').val()} );
+    var throttled_change = _.debounce(function(e) {
+        console.log('emit text');
+        socket.emit('text', { 'text': $('#text').val()} );
+    }, 1000);
+
+    $('#text').bind('input propertychange', function(e) { 
+        console.log('property');
+        throttled_change(e); 
     });
 });

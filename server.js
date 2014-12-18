@@ -13,29 +13,38 @@ server.listen(conf.port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.redirect('/text/' + encodeURIComponent(uuid.v1()));
+    res.redirect('/text/' + encodeURIComponent(uuid.v4()));
 });
 
 app.get('/text/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
     if (!texts.hasOwnProperty(id)) {
-        texts[id] = { text: '', nsp: io.of("/" + id) };
+	var text = { text: '', nsp: io.of("/" + id), last_update: new Date() }
+        texts[id] = text;
+
+        text.nsp.on('connection', function(socket) {
+    	    console.log("connection on namespace: " + id + ' at: ' + text.last_update);
+            socket.on('text', function(data) {
+                console.log('text for session: ' + id + ' at: ' + text.last_update);
+                text.text = data.text;
+                text.nsp.emit('text', data);
+            });
+        })
+    
+        // texts[id].nsp.on('disconnect', function(socket) {
+        //     console.log("discconnection on namespace: " + id + ' number of connections: ' + --texts[id].number_of_connections);
+        //});
     }
     
-    texts[id].nsp.on('connection', function(socket) {
-        socket.on('text', function(data) {
-            //console.log('text!');
-            texts[id].text = data.text;
-            // console.log('text: ' + data.text);
-            texts[id].nsp.emit('text', data);
-        });
-    })
-
     res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': texts[id].text }));
 });
 
-io.sockets.on('connection', function(socket) {
-    console.log('+');
+
+io.sockets.on('disconnect', function(socket) {
+    console.log('disconnect: ' + socket.id);
 });
 
+io.sockets.on('connect', function(socket) {
+    console.log('connect: ' + socket.id);
+});
