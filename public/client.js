@@ -15,7 +15,7 @@ $(document).ready(function() {
     var throttled_change = _.debounce(function(e) {
         // console.log('emit text');
         socket.emit('text', { 'text': $('#text').val()} );
-    }, 1000);
+    }, 100);
 
     $('#text').bind('input propertychange', function(e) { 
         // console.log('property');

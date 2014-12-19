@@ -15,19 +15,26 @@ server.listen(conf.port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.redirect('/text/' + encodeURIComponent(uuid.v4()));
+    res.redirect('text/' + encodeURIComponent(uuid.v4()));
 });
 
 app.get('/text/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
     if (!sessions.hasOwnProperty(id)) {
-        console.log("new id: " + id);
-        var session = { text: '', namespace: io.of("/" + id), last_update: new Date(), id: id }
+        console.log("new session: " + id);
+
+        var session = { 
+            text: '', 
+            namespace: io.of("/" + id), 
+            last_update: new Date(), 
+            id: id 
+        };
+
         sessions[id] = session;
 
         session.namespace.on('connection', function(socket) {
-    	    console.log("connection on namespace: " + id + ' at: ' + session.last_update);
+    	    console.log("connection for session: " + id + ' at: ' + session.last_update);
             socket.on('text', function(data) {
                 console.log('new text for session: ' + id + ' at: ' + session.last_update);
                 session.text = data.text;
@@ -35,10 +42,6 @@ app.get('/text/:id', function(req, res) {
                 session.namespace.emit('text', data);
             });
         })
-    
-        // sessions[id].namespace.on('disconnect', function(socket) {
-        //     console.log("discconnection on namespace: " + id + ' number of connections: ' + --sessions[id].number_of_connections);
-        //});
     }
     
     res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl }));
@@ -46,11 +49,11 @@ app.get('/text/:id', function(req, res) {
 
 
 io.sockets.on('disconnect', function(socket) {
-    console.log('disconnect: ' + socket.id);
+    console.log('disconnect: ' + socket.id + ' at: ' + Date.now());
 });
 
 io.sockets.on('connect', function(socket) {
-    console.log('connect: ' + socket.id);
+    console.log('connect: ' + socket.id + ' at: ' + Date.now());
 });
 
 setInterval(function() {
