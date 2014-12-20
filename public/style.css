@@ -1,24 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 html, body {
     height: 100%;
-    margin: 0;
+    width: 100%;
+}
+
+body {
+    display: table;
 }
 
 header {
-    background-color: #a0ffc0;
+    // background-color: #a0ffc0;
 }
 
-textarea_container {
+
+#status.online {
+    background-color: #00ff00;
+}
+
+#status.offline {
+    background-color: #ff0000;
+}
+
+#textarea_container {
+    display: table-row;
     width: 100%;
     height: 100%;
-    margin: 0;
+    background-color: #123456;
 }
 
 textarea {
-    margin: 0;
-    width: 99%;
-    height: 90vh;
+    width: 100%;
+    height: 99.5%;
+    box-sizing: border-box;
 }
 
 #uuid {
     display: none;
 }
+
+#userid {
+    display: none;
+}
+

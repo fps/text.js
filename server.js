@@ -15,7 +15,7 @@ server.listen(conf.port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.redirect('text/' + encodeURIComponent(uuid.v4()));
+    res.redirect('../text/' + encodeURIComponent(uuid.v4()));
 });
 
 app.get('/text/:id', function(req, res) {
@@ -36,7 +36,7 @@ app.get('/text/:id', function(req, res) {
         session.namespace.on('connection', function(socket) {
     	    console.log("connection for session: " + id + ' at: ' + session.last_update);
             socket.on('text', function(data) {
-                console.log('new text for session: ' + id + ' at: ' + session.last_update);
+                console.log('new text for session: ' + id + ' at: ' + session.last_update + ' user_id: ' + data.user_id);
                 session.text = data.text;
                 session.last_update = new Date();
                 session.namespace.emit('text', data);
@@ -44,7 +44,7 @@ app.get('/text/:id', function(req, res) {
         })
     }
     
-    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl }));
+    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl, user_id: uuid.v4() }));
 });
 
 
