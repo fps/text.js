@@ -30,7 +30,7 @@ $(document).ready(function() {
     var throttled_change = _.debounce(function(e) {
         // console.log('emit text');
         socket.emit('text', { 'text': $('#text').val(), user_id: $('#userid').text() });
-    }, 100);
+    }, 1000);
 
     $('#text').bind('input propertychange', function(e) { 
         // console.log('property');
