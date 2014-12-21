@@ -20,7 +20,7 @@ Because we thought that we could save one or two actions (clicks, copy and paste
 * Press the submit button
 * Share the resulting URL
 
-That is four steps (five if you're unlucky and have to enter a capcha). With text.js this reduces down to two:
+That is four steps (five if you're unlucky and have to enter a capcha). With text.js this reduces down to three:
 
 * Open e.g. http://fps.io/txt (a new session is automatically created and you're redirected to it)
 * Paste the text into the input field
