@@ -8,7 +8,7 @@ Because we needed a simple paste site for our team where we had control over the
 
 # And?
 
-Because we thought that we could save one or two actions (clicks, copy and paste) compared to other paste sites like http://pastebind.com. On most pastesites the flow goes like this:
+Because we thought that we could save one or two actions (clicks, copy and paste) compared to other paste sites like http://pastebin.com. On most pastesites the flow goes like this:
 
 * Open e.g. http://pastebin.com
 * Paste the text into the text field
