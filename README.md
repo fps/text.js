@@ -37,6 +37,15 @@ The step of sharing the URL is not needed anymore since all other clients alread
 
 Because we wanted a super uncluttered interface where the interface is not in the way of the text. The text is what it's all about.
 
+# Setup
+
+It is developed on ubuntu 14.04. Anything earlier and npm might have the wrong packages.
+
+* Install nodejs
+* Clone the repo
+* run npm install
+* run nodejs server.js
+
 # Is it secure?
 
 * No secure connection is used at this point. This might change in the future.
