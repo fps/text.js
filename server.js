@@ -15,7 +15,7 @@ server.listen(conf.port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.redirect('../text/' + encodeURIComponent(uuid.v4()));
+    res.redirect('../text/' + encodeURIComponent(uuid.v4().substring(0,8)));
 });
 
 app.get('/text/:id', function(req, res) {
