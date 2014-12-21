@@ -1,6 +1,10 @@
 # text.js
 
-A very very very simple paste site.
+A very very very simple paste site. It uses socket.io to push updates of the text to other connected clients.
+
+# A collaborative text editor?
+
+Yes. No. Erm... Almost. It does not implement operational transforms or anything fancy like that. Concurrent updates WILL interfere. You have been warned.
 
 # Why?
 
