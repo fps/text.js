@@ -9,17 +9,15 @@ html
         script(src="../client.js")
     body
         header
-            span#status(class='offline') offline
+            span#status(class='offline' title='Offline')
             span  | 
             span <a href="/")>new text</a>
             span  |  
             span share: <a href="/text/#{id}">../text/#{id}</a>
             span  | 
-            span <a href="http://github.com/fps/text.js">code: http://github.com/fps/text.js</a>
-            span  | 
-            span ttl: #{ttl}ms 
+            span(class='small') <a href="http://github.com/fps/text.js">View code on Github</a>
         #uuid #{decodeURIComponent(id)}
         #userid #{user_id)
         #textarea_container
-            textarea(id="text" type="text" placeholder="Text goes here... Just enter some text, then share the link in the addressbar. Updates should show up in every browser that has the same URL open. To get a new session, click (new text) above. Or just use a url of the form /text/yourdesiredsessionname. Note: This version does not implement proper locking. It's on the TODO list. So show some restraint while editing. Simultanous edits WILL interfere. The field ttl in the header denotes the time the document stays alive after the last client disconnected." rows="10")
+            textarea(id="text" type="text" placeholder="Text goes here... enter or copy your text, then share the link in the addressbar. Updates should show up in every browser that has the same URL open. To get a new session, click (new text) above. Or just use a url of the form /text/yourdesiredsessionname. Note: This version does not implement proper locking. It's on the TODO list. So show some restraint while editing. Simultanous edits WILL interfere. TTL is set to #{ttl}ms and denotes the time the document stays alive after the last client disconnected." rows="10")
                 |#{text}
