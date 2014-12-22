@@ -49,11 +49,11 @@ app.get('/text/:id', function(req, res) {
 
 
 io.sockets.on('disconnect', function(socket) {
-    console.log('disconnect: ' + socket.id + ' at: ' + Date.now());
+    console.log('disconnect: ' + socket.id + ' at: ' + new Date());
 });
 
 io.sockets.on('connect', function(socket) {
-    console.log('connect: ' + socket.id + ' at: ' + Date.now());
+    console.log('connect: ' + socket.id + ' at: ' + new Date());
 });
 
 setInterval(function() {
@@ -63,6 +63,7 @@ setInterval(function() {
         var number_of_connections = 0
         for (connection in session.namespace.connected) {
             ++number_of_connections;
+            break; // no need to continue for the check following..
         }
         // console.log(session.id + " " + number_of_connections);
         if (number_of_connections > 0) {
