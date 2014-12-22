@@ -51,7 +51,7 @@ It is developed on ubuntu 14.04. Anything earlier and npm might have the wrong p
 * No secure connection is used at this point. This might change in the future.
 * The process can be rather easily DDOS'ed since no restrictions on number of sessions or total text length are imposed yet.
 
-# Author
+# Authors
 
-Florian Paul Schmidt (mista.tapas@gmx.net)
-
+* Florian Paul Schmidt (mista.tapas@gmx.net)
+* Client side style changes: amazingdetective (fill in details here)
