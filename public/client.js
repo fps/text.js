@@ -12,7 +12,7 @@ $(document).ready(function() {
         $('#status').removeClass();
         $('#status').addClass('online');
         $('#status').prop('title', 'Online');
-        $('#status').prop('disabled', false);
+        $('#text').prop('disabled', false);
     });
 
     socket.on('text', function(data) {
