@@ -38,12 +38,13 @@ header {
 }
 
 #textarea_container {
-    height: 80%;
+    height: 100%;
     background: transparent;
     margin: 30px 70px 30px 70px;
-    display: block;
+    display: table-row;
     width: auto;
-    -moz-box-shadow: 3px 13px 10px -10px #ccc; -webkit-box-shadow: 3px 13px 10px -10px #ccc; 
+    -moz-box-shadow: 3px 13px 10px -10px #ccc; 
+    -webkit-box-shadow: 3px 13px 10px -10px #ccc; 
     box-shadow: 7px 13px 10px -10px #ccc;
 }
 
