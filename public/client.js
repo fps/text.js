@@ -11,7 +11,7 @@ $(document).ready(function() {
         console.log('connected');
         $('#status').removeClass();
         $('#status').addClass('online');
-        $('#status').text('online');
+        $('#status').prop('title', 'Online');
         $('#status').prop('disabled', false);
     });
 
@@ -41,7 +41,7 @@ $(document).ready(function() {
         console.log('disconnect');
         $('#status').removeClass();
         $('#status').addClass('offline');
-        $('#status').text('offline');
+        $('#status').prop('title', 'Offline');
         $('#text').prop('disabled', true);
     });
 });
