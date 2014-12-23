@@ -15,10 +15,10 @@ server.listen(conf.port);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.redirect('../text/' + encodeURIComponent(uuid.v4().substring(0,8)));
+    res.redirect('../' + encodeURIComponent(uuid.v4().substring(0,8)));
 });
 
-app.get('/text/:id', function(req, res) {
+app.get('/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
     if (!sessions.hasOwnProperty(id)) {
