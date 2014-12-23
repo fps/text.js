@@ -33,7 +33,7 @@ var req = http.request(options, function(res) {
             process.stdin.on('readable', function() {
                 var stdin = process.stdin.read();
                 if (stdin !== null) {
-                    socket.emit('text', { 'text': stdin, user_id: 'rakete', id: id });
+                    socket.emit('text', { 'text': stdin, user_id: 'paste.js', id: id });
                 }
             });
         });
