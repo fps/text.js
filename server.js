@@ -65,20 +65,15 @@ setInterval(function() {
             ++number_of_connections;
             break; // no need to continue for the check following..
         }
-        // console.log(session.id + " " + number_of_connections);
+
         if (number_of_connections > 0) {
             session.last_update = new Date();
         }
 
-        //console.log(sessions[key].namespace.connected);
         var alive = new Date().getTime() - session.last_update.getTime();
-        // console.log(sessions[key].id + ' ' + alive);
         if (alive > conf.ttl) {
             console.log('removing ' + session.id);
-            //sessions[key].namespace.emit('disconnect');
-            // sessions = delete_key(sessions, [key]);
             delete io.nsps['/' + session.id];
-            //delete sessions[key].namespace;
             delete sessions[key];
             break;
         }

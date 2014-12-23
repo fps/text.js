@@ -1,6 +1,6 @@
 {
     "port": 21324,
-    "ttl": 10000,
+    "ttl": 600000,
     "max_sessions": 100,
     "max_total_text_length_chars": 500000000
 }
