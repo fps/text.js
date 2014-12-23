@@ -4,7 +4,7 @@ $(document).ready(function() {
     var uuid = $('#uuid').text();
     // console.log("orly?" + uuid);
 
-    socket = io('/' + uuid);
+    socket = io('/' + uuid, { path: $('#prefix').text() + "/socket.io" });
     // socket.emit('hi', {});
 
     socket.on('connect', function() {

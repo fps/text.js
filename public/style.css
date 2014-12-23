@@ -70,6 +70,10 @@ header {
     display: none;
 }
 
+#prefix {
+    display: none;
+}
+
 a {
     color: #0288D1;
     text-decoration: none;

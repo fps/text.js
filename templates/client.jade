@@ -2,24 +2,25 @@ doctype html
 html
     head
         title #{id} - text.js
-        link(rel="stylesheet" href="../style.css")
-        script(src="../jquery-1.11.1.min.js")
-        script(src="../underscore-min.js")
-        script(src="../socket.io/socket.io.js")
-        script(src="../client.js")
+        link(rel="stylesheet" href="#{prefix}/style.css")
+        script(src="#{prefix}/jquery-1.11.1.min.js")
+        script(src="#{prefix}/underscore-min.js")
+        script(src="#{prefix}/socket.io/socket.io.js")
+        script(src="#{prefix}/client.js")
     body
         header
             span#status(class='offline' title='Offline')
             span  | 
-            span <a href="/")>new</a>
+            span <a href="#{prefix}/")>new</a>
             span  |  
-            span <a href="/text/#{id}">share</a>
+            span <a href="#{prefix}/#{id}">share</a>
             span  | 
             span(class='small') <a href="http://github.com/fps/text.js">code</a>
             span  | 
             span ttl: #{ttl}ms
         #uuid #{decodeURIComponent(id)}
         #userid #{user_id)
+        #prefix #{prefix}
         #textarea_container
             textarea(id="text" type="text" placeholder="1] Put text here. 2] Share the URL. Optional: 3a] Click new to open a new text. Or: 3b] Click code to see the code on github. Warning: Concurrent edits WILL interfere. Warning: Sessions will live #{ttl} milliseconds once the last client disconnected.")
                 |#{text}

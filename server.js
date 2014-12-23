@@ -1,24 +1,25 @@
 var express = require('express')
 ,   app = express()
 ,   server = require('http').createServer(app)
-,   io = require('socket.io').listen(server)
 ,   jade = require('jade')
 ,   uuid = require('node-uuid')
 ,   delete_key = require('key-del')
 ,   conf = require('./config.json')
 ;
 
+var io = require('socket.io')({path: conf.prefix + '/socket.io'}).listen(server);
+
 var sessions = { };
 
 server.listen(conf.port);
 
-app.use(express.static(__dirname + '/public'));
+app.use(conf.prefix, express.static(__dirname + '/public'));
 
-app.get('/', function (req, res) {
-    res.redirect('../' + encodeURIComponent(uuid.v4().substring(0,8)));
+app.get(conf.prefix + '/', function (req, res) {
+    res.redirect(conf.prefix + '/' + encodeURIComponent(uuid.v4().substring(0,8)));
 });
 
-app.get('/:id', function(req, res) {
+app.get(conf.prefix + '/:id', function(req, res) {
     var id = decodeURIComponent(req.params.id);
     
     if (!sessions.hasOwnProperty(id)) {
@@ -44,7 +45,7 @@ app.get('/:id', function(req, res) {
         })
     }
     
-    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl, user_id: uuid.v4() }));
+    res.send(jade.renderFile('templates/client.jade', { 'id': id, 'text': sessions[id].text, ttl: conf.ttl, user_id: uuid.v4(), prefix: conf.prefix }));
 });
 
 
