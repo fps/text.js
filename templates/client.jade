@@ -16,8 +16,10 @@ html
             span <a href="/text/#{id}">share</a>
             span  | 
             span(class='small') <a href="http://github.com/fps/text.js">code</a>
+            span  | 
+            span ttl: #{ttl}ms
         #uuid #{decodeURIComponent(id)}
         #userid #{user_id)
         #textarea_container
-            textarea(id="text" type="text" placeholder="1] Put text here. 2] Share the URL. Optional: 3a] Click new to open a new text. Or: 3b] Click code to see the code on github. Warning: Concurrent edits WILL interfere.")
+            textarea(id="text" type="text" placeholder="1] Put text here. 2] Share the URL. Optional: 3a] Click new to open a new text. Or: 3b] Click code to see the code on github. Warning: Concurrent edits WILL interfere. Warning: Sessions will live #{ttl} milliseconds once the last client disconnected.")
                 |#{text}
