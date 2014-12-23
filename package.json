@@ -6,6 +6,7 @@
     "dependencies": {
         "express": "*",
         "socket.io": "*",
+        "socket.io-client": "*",
         "jade": "*",
         "node-uuid": "*",
         "key-del": "*",
