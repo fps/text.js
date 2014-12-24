@@ -4,7 +4,7 @@ var url = require('url')
 var http = require('http')
 
 var id = encodeURIComponent(uuid.v4().substring(0,8));
-var connection = url.parse('http://fps.io:21324/text/' + id);
+var connection = url.parse('http://fps.io/txt/' + id);
 
 process.argv.forEach(function(val, index, array) {
     var parsed = url.parse(val);
@@ -39,7 +39,7 @@ var req = http.request(options, function(res) {
         });
 
         socket.on('text', function(data) {
-            console.log(connection.protocol + '//' + connection.host + '/text/' + id);
+            console.log(connection.protocol + '//' + connection.host + id);
             socket.disconnect();
         });
     });
