@@ -28,7 +28,7 @@ That is four steps (five if you're unlucky and have to enter a capcha). With tex
 
 This is three steps. That is one less than usual. Yay for productivity. You can even reduce it to two if you care to choose the session id beforehand yourself:
 
-* Open http://fps.io:21324/text/mysupersessionname
+* Open http://fps.io/txt/mysupersessionname
 * Paste the text
 
 The step of sharing the URL is not needed anymore since all other clients already know the session id and can just open the same URL.
@@ -44,6 +44,7 @@ It is developed on ubuntu 14.04. Anything earlier and npm might have the wrong p
 * Install nodejs
 * Clone the repo
 * run npm install
+* Optional: Change the config.json file
 * run nodejs server.js
 
 # Is it secure?
