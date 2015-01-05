@@ -56,3 +56,4 @@ It is developed on ubuntu 14.04. Anything earlier and npm might have the wrong p
 
 * Florian Paul Schmidt (mista.tapas@gmx.net)
 * Client side style changes: amazingdetective (fill in details here)
+* Andreas Raster (lazor@affenbande.org)
