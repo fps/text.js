@@ -6,6 +6,14 @@ A very very very simple paste site. It uses socket.io to push updates of the tex
 
 Yes. No. Erm... Almost. It does not implement operational transforms or anything fancy like that. Concurrent updates WILL interfere. You have been warned.
 
+# And a command line paste tool
+
+<pre>
+echo foobar | nodejs paste.js
+</pre>
+
+which spits out the result link.
+
 # Why?
 
 Because we needed a simple paste site for our team where we had control over the data. 
