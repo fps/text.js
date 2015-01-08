@@ -23,9 +23,10 @@ var options = {
 };
 
 var req = http.request(options, function(res) {
-    res.on('data', function (chunk) {
-        //console.log(connection.protocol + '//' + connection.host + '/' + id);
-        var socket = io.connect(connection.protocol + '//' + connection.host + '/' + id);
+    res.on('data', function() {});
+    res.on('end', function() {
+        //console.log(connection.protocol + '//' + connection.host + '/txt/socket.io/' + id);
+        var socket = io.connect(connection.protocol + '//' + connection.host + '/' + id, { path: "/txt/socket.io" });
         socket.on('connect', function() {
             //console.log("socket connected");
             process.stdin.setEncoding('utf8');
@@ -39,7 +40,7 @@ var req = http.request(options, function(res) {
         });
 
         socket.on('text', function(data) {
-            console.log(connection.protocol + '//' + connection.host + id);
+            console.log(url.format(connection));
             socket.disconnect();
         });
     });

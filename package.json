@@ -3,6 +3,10 @@
     "description": "Collaborative text editing web application",
     "author": "Florian Paul Schmidt",
     "version": "0.0.1",
+    "repository": "https://github.com/fps/text.js",
+    "scripts": {
+        "start": "node server.js"
+    },
     "dependencies": {
         "express": "*",
         "socket.io": "*",

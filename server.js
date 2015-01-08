@@ -35,7 +35,7 @@ app.get(conf.prefix + '/:id', function(req, res) {
         sessions[id] = session;
 
         session.namespace.on('connection', function(socket) {
-    	    console.log("connection for session: " + id + ' at: ' + session.last_update);
+            console.log("connection for session: " + id + ' at: ' + session.last_update);
             socket.on('text', function(data) {
                 console.log('new text for session: ' + id + ' at: ' + session.last_update + ' user_id: ' + data.user_id);
                 session.text = data.text;

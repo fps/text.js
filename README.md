@@ -6,6 +6,14 @@ A very very very simple paste site. It uses socket.io to push updates of the tex
 
 Yes. No. Erm... Almost. It does not implement operational transforms or anything fancy like that. Concurrent updates WILL interfere. You have been warned.
 
+# And a command line paste tool
+
+<pre>
+echo foobar | nodejs paste.js
+</pre>
+
+which spits out the result link.
+
 # Why?
 
 Because we needed a simple paste site for our team where we had control over the data. 
@@ -56,3 +64,4 @@ It is developed on ubuntu 14.04. Anything earlier and npm might have the wrong p
 
 * Florian Paul Schmidt (mista.tapas@gmx.net)
 * Client side style changes: amazingdetective (fill in details here)
+* Andreas Raster (lazor@affenbande.org)
